@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+    background-color: rgb(255, 0, 157);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background-color: #49e60b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e6ecf1;
+}
+
+.surprise {
+    display: none;
+    font-size: 2em;
+    margin-top: 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#confettiCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.slideshow-container {
+    position: relative;
+    max-width: 300px;
+    margin: auto;
+    display: none;
+}
+
+.mySlides {
+    display: none;
+}
+
+.fade {
+    animation: fade 1.5s infinite;
+}
+
+@keyframes fade {
+    from { opacity: .4 }
+    to { opacity: 1 }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MORNING BIRTHDAY GIRL!!!</h1>
+        <button onclick="showSurprise()">Surprise!</button>
+        <div id="surprise" class="surprise">
+            <h1>HAPPIEST BIRTHDAY SHIROW</h1>
+            <p>😍Wishing you a day filled with love and happiness. You are truly special to me🥰!!!</p>
+            <P>May it be a beginning of possibilities and breakthroughs</P>
+            🎉🎊🥂🎁💞
+        </div>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="WhatsApp Image 2024-07-24 at 11.06.04.jpeg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="WhatsApp Image 2024-07-24 at 11.06.06.jpeg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="WhatsApp Image 2024-07-24 at 11.06.05.jpeg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="WhatsApp Image 2024-07-24 at 11.06.07.jpeg" style="width:100%">
+            </div>
+        </div>
+        <canvas id="confettiCanvas"></canvas>
+        <audio id="birthdaySong" src="y2mate.com - CHRISTINA PERRI  YOU ARE MY SUNSHINE Lyric Video.mp3"></audio>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+    <script> function showSurprise() {
+        var surprise = document.getElementById("surprise");
+        var slideshow = document.querySelector('.slideshow-container');
+        surprise.style.display = "block";
+        slideshow.style.display = "block";
+        launchConfetti();
+        playSong();
+        showSlides();
+    }
+    
+    function launchConfetti() {
+        var duration = 5 * 1000;
+        var end = Date.now() + duration;
+    
+        (function frame() {
+            confetti({
+                particleCount: 3,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 }
+            });
+            confetti({
+                particleCount: 3,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 }
+            });
+    
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
+    }
+    
+    function playSong() {
+        var song = document.getElementById("birthdaySong");
+        song.play();
+    }
+    
+    var slideIndex = 0;
+    
+    function showSlides() {
+        var slides = document.getElementsByClassName("mySlides");
+        for (var i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    
+        slides[slideIndex-1].style.display = "block";  
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+    </script>
+</body>
+</html>
